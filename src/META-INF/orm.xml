@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm orm_1_0.xsd"
+                 version="1.0">
+   <persistence-unit-metadata>
+      <!--        <xml-mapping-metadata-complete/>-->
+      <persistence-unit-defaults>
+         <!--schema>HR</schema-->
+         <access>FIELD</access>
+         <!--            <cascade-persist/>   -->
+      </persistence-unit-defaults>
+   </persistence-unit-metadata>
+   <entity class="User">
+      <named-query name="User.findByName">
+         <query>SELECT u FROM User u WHERE u.name = :name</query>
+      </named-query>
+   </entity>
+   <entity class="Policy">
+      <named-query name="Policy.findByUserApplicationRole">
+         <query>
+            SELECT p FROM Policy p WHERE (:application IS NULL OR p.application = :application) AND (:roleId IS NULL OR p.role.id = :roleId) AND 
+            (:userId IS NULL OR EXISTS (SELECT u FROM User u JOIN u.roleList r WHERE u.id = :userId AND p.role = r) OR
+            EXISTS (SELECT uu FROM User uu JOIN uu.remoteRoleList rr WHERE uu.id = :userId AND p.role = rr)) 
+            ORDER BY p.application, p.uriExpression, p.effect, p.role.name            
+         </query>        
+      </named-query>
+      <named-query name="Policy.applicationList">
+         <query>
+            SELECT DISTINCT p.application FROM Policy p ORDER BY p.application
+         </query>   
+      </named-query>
+   </entity>
+</entity-mappings>
