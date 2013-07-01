@@ -61,6 +61,6 @@ if (!(object instanceof UserLogin)) {
 
   @Override
   public String toString() {
-    return "org.semanticprogrammer.app.accesscontrol.persistence.UserLogin[userId=" + (user == null ? "" : user.getId()) + "]";
+    return "accesscontrol.entity.UserLogin[userId=" + (user == null ? "" : user.getId()) + "]";
   }
 }

@@ -95,7 +95,7 @@ public class Policy implements Serializable {
 
    @Override
    public String toString() {
-      return "org.semanticprogrammer.app.accesscontrol.entity.Policy[id=" + id + "]";
+      return "accesscontrol.entity.Policy[id=" + id + "]";
    }
 
 }

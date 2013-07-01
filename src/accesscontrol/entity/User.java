@@ -133,6 +133,6 @@ public class User implements Serializable {
 
    @Override
    public String toString() {
-      return "org.semanticprogrammer.app.accesscontrol.entity.User[id=" + id + "]";
+      return "accesscontrol.entity.User[id=" + id + "]";
    }
 }

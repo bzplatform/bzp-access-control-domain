@@ -11,12 +11,26 @@
          <!--            <cascade-persist/>   -->
       </persistence-unit-defaults>
    </persistence-unit-metadata>
+   <package>accesscontrol.entity</package>
    <entity class="User">
       <named-query name="User.findByName">
          <query>SELECT u FROM User u WHERE u.name = :name</query>
       </named-query>
+      <named-query name="User.findByLogin">
+         <query>SELECT u FROM User u JOIN u.login l WHERE l.name = :loginName AND l.password = :password</query>
+      </named-query>
    </entity>
    <entity class="Policy">
+      <named-query name="Policy.findByRoleName">
+         <query>
+            SELECT p FROM Policy p WHERE p.role.name = :name AND p.application = :application
+         </query>        
+      </named-query>
+      <named-query name="Policy.findByUser">
+         <query>
+            SELECT p FROM Policy p WHERE p.application = :application AND EXISTS (SELECT u FROM User u JOIN u.roleList r WHERE u = :user AND r = p.role)
+         </query>        
+      </named-query>      
       <named-query name="Policy.findByUserApplicationRole">
          <query>
             SELECT p FROM Policy p WHERE (:application IS NULL OR p.application = :application) AND (:roleId IS NULL OR p.role.id = :roleId) AND 

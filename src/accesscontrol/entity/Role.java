@@ -51,6 +51,6 @@ public class Role implements Serializable {
 
   @Override
   public String toString() {
-    return "org.semanticprogrammer.app.accesscontrol.entity.Role[id=" + id + "]";
+    return "accesscontrol.entity.Role[id=" + id + "]";
   }
 }
