@@ -19,6 +19,9 @@
       <named-query name="User.findByLogin">
          <query>SELECT u FROM User u JOIN u.login l WHERE l.name = :loginName AND l.password = :password</query>
       </named-query>
+      <named-query name="User.findById">
+         <query>SELECT u FROM User u WHERE u.id = :id</query>
+      </named-query>      
    </entity>
    <entity class="Policy">
       <named-query name="Policy.findByRoleName">
